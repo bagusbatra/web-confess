@@ -1,0 +1,247 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+height:100vh;
+background: linear-gradient(
+170deg,
+#7a003c,
+#4b0026,
+#2b0015
+);
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+color:white;
+}
+
+/* card */
+
+.container{
+background:rgba(0, 0, 0, 0.429);
+padding:40px;
+border-radius:15px;
+text-align:center;
+width:400px;
+backdrop-filter:blur(10px);
+z-index:10;
+}
+
+/* tombol */
+
+button{
+padding:12px 25px;
+margin:25px 10px 10px 10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+h1, h2 {
+    padding: 10px;
+}
+p {
+    padding-bottom: 10px;
+}
+
+#yes{
+background:#ff4d6d;
+color:white;
+}
+
+#no{
+background:#444;
+color:white;
+}
+
+
+.page{
+display:none;
+animation:fade 4.2s ease;
+}
+
+.page.active{
+display:block;
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(10px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+
+/* ==================== */
+/* LOVE PARTICLE */
+/* ==================== */
+
+.love-container{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:1;
+}
+
+.love{
+position:absolute;
+color:#ff4d6d;
+opacity:0.25;
+animation:loveFloat linear forwards;
+}
+
+@keyframes loveFloat{
+
+0%{
+transform:translateY(100vh) scale(0.5);
+opacity:0;
+}
+
+30%{
+opacity:0.25;
+}
+
+100%{
+transform:translateY(-10vh) scale(1.2);
+opacity:0;
+}
+
+}
+
+/* ==================== */
+/* FOTO JATUH */
+/* ==================== */
+
+.leaf-container{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:2;
+}
+
+.leaf{
+position:absolute;
+opacity:0.85;
+animation:fall linear forwards;
+border-radius:8px;
+}
+
+/* animasi daun */
+
+@keyframes fall{
+
+0%{
+transform:translateY(-10vh) translateX(0) rotate(0deg);
+}
+
+25%{
+transform:translateY(25vh) translateX(40px) rotate(20deg);
+}
+
+50%{
+transform:translateY(50vh) translateX(-40px) rotate(-20deg);
+}
+
+75%{
+transform:translateY(75vh) translateX(30px) rotate(15deg);
+}
+
+100%{
+transform:translateY(110vh) translateX(-20px) rotate(-10deg);
+}
+
+}
+
+/* ========================= */
+/* RESPONSIVE MOBILE */
+/* ========================= */
+
+@media (max-width: 768px){
+
+.container{
+width:80%;
+padding:25px;
+border-radius:12px;
+}
+
+h1{
+font-size:22px;
+}
+
+h2{
+font-size:20px;
+}
+
+p{
+font-size:14px;
+line-height:1.5;
+}
+
+button{
+padding:12px 18px;
+font-size:14px;
+margin:8px;
+}
+
+}
+
+
+/* ========================= */
+/* EXTRA SMALL DEVICE */
+/* ========================= */
+
+@media (max-width:480px){
+
+.container{
+width:80%;
+padding:20px;
+}
+
+h1{
+font-size:20px;
+}
+
+h2{
+font-size:18px;
+}
+
+p{
+font-size:13px;
+}
+
+button{
+width:100%;
+margin:6px 0;
+}
+
+/* gambar jatuh lebih kecil */
+
+.leaf{
+width:70px !important;
+}
+
+/* love particle lebih kecil */
+
+.love{
+font-size:44px !important;
+}
+
+}
