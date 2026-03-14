@@ -60,11 +60,33 @@ setInterval(createLeaf,900)
 // TOMBOL YES
 // =======================
 
-document.getElementById("yes").onclick=function(){
 
-    alert("Terima kasih sudah memberi kesempatan ❤️")
 
-}
+// =======================
+// TOMBOL YES
+// =======================
+
+const btnNo = document.getElementById("no");
+
+btnNo.addEventListener("click", function() {
+
+    // jalankan animasi jatuh
+    btnNo.classList.remove("animate__hinge");
+    void btnNo.offsetWidth; 
+    btnNo.classList.add("animate__animated", "animate__hinge");
+
+    // setelah animasi selesai tombol disembunyikan
+    setTimeout(() => {
+        btnNo.style.display = "none";
+    }, 2000); // durasi animasi hinge sekitar 2 detik
+
+    // tombol no kemudian muncul lagi
+    setTimeout(() => {
+        btnNo.style.display = "inline-block";
+        btnNo.classList.remove("animate__animated", "animate__hinge");
+    }, 10000);
+
+});
 
 
 
@@ -112,3 +134,5 @@ document.addEventListener("click", () => {
         }
     },200)
 },{once:true})
+
+
