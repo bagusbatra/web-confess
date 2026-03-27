@@ -1,4 +1,58 @@
 <?php
+// Fungsi compress gambar ke maksimal 180KB
+function compressImageToTargetSize($filePath, $targetKB = 180) {
+    $targetBytes = $targetKB * 1024;
+
+    if (!file_exists($filePath)) return;
+
+    $info = getimagesize($filePath);
+    if (!$info) return;
+
+    $mime = $info['mime'];
+
+    switch ($mime) {
+        case 'image/jpeg':
+            $image = imagecreatefromjpeg($filePath);
+            break;
+        case 'image/png':
+            $image = imagecreatefrompng($filePath);
+            break;
+        case 'image/webp':
+            $image = imagecreatefromwebp($filePath);
+            break;
+        default:
+            return; // skip gif / unsupported
+    }
+
+    $quality = 85;
+
+    do {
+        switch ($mime) {
+            case 'image/jpeg':
+                imagejpeg($image, $filePath, $quality);
+                break;
+
+            case 'image/png':
+                $pngQuality = 9 - round(($quality / 100) * 9);
+                imagepng($image, $filePath, $pngQuality);
+                break;
+
+            case 'image/webp':
+                imagewebp($image, $filePath, $quality);
+                break;
+        }
+
+        clearstatcache();
+        $fileSize = filesize($filePath);
+
+        $quality -= 5;
+
+    } while ($fileSize > $targetBytes && $quality > 30);
+
+    imagedestroy($image);
+}
+
+
 // Hanya tangani POST dan file
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file']) && isset($_POST['folder'])) {
     $folder = $_POST['folder'];
@@ -19,19 +73,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file']) && isset($_P
 
     $allowedExt = ['jpg','jpeg','png','gif','webp'];
     $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
     if (!in_array($ext, $allowedExt)) {
         echo "Jenis file tidak diizinkan!";
         exit;
     }
 
     if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFile)) {
-        // Pesan bersih tanpa HTML
+
+        // AUTO COMPRESS KE MAKSIMAL 180KB
+        compressImageToTargetSize($targetFile, 180);
+
         echo "File berhasil diupload";
+
     } else {
         echo "Gagal menyimpan file!";
     }
-} else {
-    echo '<p style="display: none;">gagal</p>';
+
+    exit; // penting agar HTML tidak ikut tampil saat fetch
 }
 ?>
 

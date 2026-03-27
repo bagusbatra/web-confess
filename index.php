@@ -7,6 +7,7 @@
         if(in_array($ext, ["jpg","jpeg","png","webp","gif"])){
             $images[] = $folder.$file;
         }
+        // exit;
     }
 ?>
 

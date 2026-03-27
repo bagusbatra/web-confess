@@ -40,9 +40,9 @@ function createLeaf(){
 
     leaf.classList.add("leaf")
 
-    leaf.style.left = Math.random()*120 + "vw"
+    leaf.style.left = Math.random()*100 + "vw"
 
-    leaf.style.width = (Math.random()*100 + 60) + "px"
+    leaf.style.width = (Math.random()*100 + 40) + "px"
 
     leaf.style.animationDuration = (Math.random()*5 + 8) + "s"
 
