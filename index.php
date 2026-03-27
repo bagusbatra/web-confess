@@ -1,11 +1,23 @@
 <?php
     $images = [];
     $folder = "assets/";
-    $files = scandir($folder);
-    foreach($files as $file){
-        $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-        if(in_array($ext, ["jpg","jpeg","png","webp","gif"])){
-            $images[] = $folder.$file;
+
+    if (is_dir($folder)) {
+        $files = scandir($folder);
+
+        foreach ($files as $file) {
+            $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+
+            if (in_array($ext, ["jpg", "jpeg", "png", "webp", "gif"])) {
+                $images[] = $folder . $file;
+            }
+        }
+    }
+
+    // Tampilkan hanya jika ada gambar
+    if (!empty($images)) {
+        foreach ($images as $img) {
+            echo "<img src='$img' width='200'>";
         }
     }
 ?>
@@ -35,7 +47,7 @@
                 <p>
                     Hai, Della. Ada sesuatu yang sudah lama tersimpan dalam hati. Bukan 
                     sesuatu yang rumit, bukan juga sesuatu yang besar. Hanya sebuah cerita 
-                    kecil, tentang bagaimana seseorang tanpa sadar menjadi begitu berarti 
+                    kecil, tentang perempuan sederhana menjadi begitu berarti 
                     dalam hidupku.
                 </p>
                 <button class="next">Lanjut</button>
@@ -123,7 +135,7 @@
                 <p>
                 Della,
                 dari semua kebetulan yang terjadi dalam hidupku,
-                mengenalmu adalah salah satu yang paling indah.
+                mengenalmu adalah hal yang paling indah.
                 <br><br>
                 Dan hari ini aku hanya ingin jujur pada perasaanku.
                 Aku tidak hanya menyukaimu.
