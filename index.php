@@ -1,23 +1,11 @@
 <?php
     $images = [];
     $folder = "assets/";
-
-    if (is_dir($folder)) {
-        $files = scandir($folder);
-
-        foreach ($files as $file) {
-            $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-
-            if (in_array($ext, ["jpg", "jpeg", "png", "webp", "gif"])) {
-                $images[] = $folder . $file;
-            }
-        }
-    }
-
-    // Tampilkan hanya jika ada gambar
-    if (!empty($images)) {
-        foreach ($images as $img) {
-            echo "<img src='$img' width='200'>";
+    $files = scandir($folder);
+    foreach($files as $file){
+        $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        if(in_array($ext, ["jpg","jpeg","png","webp","gif"])){
+            $images[] = $folder.$file;
         }
     }
 ?>
